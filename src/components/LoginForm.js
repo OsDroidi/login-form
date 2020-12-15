@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 /* or
@@ -15,6 +15,18 @@ function LoginForm({ Login, error }) {
     e.preventDefault();
     Login(details);
   };
+
+  useEffect(() => {
+    const data = localStorage.getItem('login-form-info');
+    if(data) {
+      setDeatils(JSON.parse(data))
+    }
+ 
+  }, [])
+
+useEffect(() => {
+  localStorage.setItem('login-form-info', JSON.stringify(details))
+})
   return (
     <Form onSubmit={submitHandler} className="login-form ">
       <div className="form-inner">

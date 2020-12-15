@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import LoginForm from './LoginForm'
 import Welcome from './Welcome'
 
@@ -40,6 +40,18 @@ function Home() {
   const Logout = () => {
     setUser({ name: '', username: '' })
   }
+
+  useEffect(() => {
+    const data = localStorage.getItem('login');
+    if(data) {
+      setUser(JSON.parse(data))
+    }
+ 
+  }, [])
+
+useEffect(() => {
+  localStorage.setItem('login', JSON.stringify(user))
+})
   return (
     // <> is a short syntax to declaring React.Fragment
     <>
